@@ -84,7 +84,7 @@
             <% if(member.photo){ %>
                 <div class="image content">
                     <div class="ui medium image">
-                        <img src="http://msannuoi.com/photo/<%=member.photo%>">
+                        <img src="/photo/<%=member.photo%>">
                     </div>
                     <div class="description">
                         <table class="ui celled table">
@@ -141,8 +141,8 @@
                         </div>
         </div>
         <% } %>
-            <div class="ui fixed secondary pointing menu">
-                <a class="item active" one-link-mark="yes">
+            <div class="ui fixed menu">
+                <a class="header item" one-link-mark="yes">
                     msannuoi
                 </a>
                 <% for(let grade in grades ) { %>
