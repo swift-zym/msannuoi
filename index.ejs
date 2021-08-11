@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>msannuoi</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <% for(let member of members){ %>
+        <div class="ui modal" id="modal-<%=member.id%>">
+            <i class="close icon"></i>
+            <div class="header">
+                <%= member.name %>
+            </div>
+            <% if(member.photo){ %>
+                <div class="image content">
+                    <div class="ui medium image">
+                        <img src="http://msannuoi.com/photo/<%=member.photo%>">
+                    </div>
+                    <div class="description">
+                        <table class="ui celled table">
+                            <thead>
+                              <th>奖项</th>
+                              <th>分数</th>
+                              <th>年级</th>
+                            </tr></thead>
+                            <tbody>
+                              <% for(let award of member.awards) { %>
+                              <tr>
+                                <td><%=award.identity%> <%=award.award_type%></td>
+                                <td><%=award.score%></td>
+                                <td><%=award.grade%></td>
+                              </tr>
+                              <% } %>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+                <% } else {%>
+                    <div class="content">
+                        <table class="ui celled table">
+                            <thead>
+                              <th>奖项</th>
+                              <th>分数</th>
+                              <th>年级</th>
+                            </tr></thead>
+                            <tbody>
+                              <% for(let award of member.awards) { %>
+                              <tr>
+                                <td><%=award.identity%> <%=award.award_type%></td>
+                                <td><%=award.score%></td>
+                                <td><%=award.grade%></td>
+                              </tr>
+                              <% } %>
+                            </tbody>
+                          </table>
+                    </div>
+                    <% } %>
+                        <div class="actions">
+                            <% const color=["green","red","black","teal","blue","orange","pink","violet"]; const
+                                name=["blog","qq","github","bilibili","twitter","weibo","music_163","zhihu"];const
+                                icon=["blogger","qq","github","tv","twitter","weibo","music","info"]; const
+                                prefilx=["","tencent://snsapp/?cmd=2&ver=1&site=qq&menu=yes&uin=","https://github.com/","https://space.bilibili.com/","https://twitter.com/","https://weibo.com/u/","https://music.163.com/#/user/home?id=","https://www.zhihu.com/people/"]; for(let i=0;i<8;i++){%>
+                                <% if(!member[name[i]])continue;%>
+                                    <a href="<%=prefilx[i]%><%=member[name[i]]%>">
+                                        <div class="ui <%=color[i]%> right labeled icon button">
+                                            <%=name[i]%>
+                                                <i class="<%=icon[i]%> icon"></i>
+                                        </div>
+                                    </a>
+                                    <% } %>
+                        </div>
+        </div>
+        <% } %>
+            <div class="ui fixed secondary pointing menu">
+                <a class="item active" one-link-mark="yes">
+                    msannuoi
+                </a>
+                <% for(let grade in grades ) { %>
+                    <a href="#<%=grade%>" class="item" one-link-mark="yes">
+                        <%=grade=="2000" ? "老师们" : `${grade}届`%>
+                    </a>
+                    <% } %>
+            </div>
+            <div class="ui center aligned container" style="margin-top: 50px;">
+                <div class="ui grid">
+                    <% for(let grade in grades ) { %>
+                        <div class="row">
+                            <div class="ui grid">
+                                <div class="row">
+                                    <h2 class="ui header" id="<%=grade%>">
+                                        <%=grade=="2000" ? "老师们" : `${grade}届`%>
+                                    </h2>
+                                </div>
+                                <div class="row">
+                                    <div class="ui link cards">
+                                        <% for(let member of grades[grade]) { %>
+                                            <div class="card" onclick="$('#modal-<%=member.id%>').modal('show')">
+                                                <div class="image">
+                                                    <img
+                                                        src="http://q.qlogo.cn/headimg_dl?bs=qq&dst_uin=<%=member.qq%>&src_uin=www.jlwz.cn&fid=blog&spec=4">
+                                                </div>
+                                                <div class="content">
+                                                    <div class="header">
+                                                        <%=member.name%>
+                                                    </div>
+                                                    <div class="meta">
+                                                        <%=member.id%>
+                                                    </div>
+                                                    <div class="description">
+                                                        <%=member.say%>
+                                                    </div>
+                                                </div>
+                                                <div class="extra content">
+                                                    <span>
+                                                        <i class="university icon"></i>
+                                                        <%= member.school%>
+                                                            <%=member.major ? ` | ${member.major}` : "" %>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+</body>
+
+</html>
