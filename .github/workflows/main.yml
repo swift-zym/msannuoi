@@ -37,9 +37,9 @@ jobs:
         if: failure()
         uses: peter-evans/create-pull-request@v3.10.0
         with:
-          commit-message: "style: format codes"
-          title: "style: format codes for ${{ github.actor }} on ${{ github.ref }}"
-          labels: "style"
+          commit-message: "build: build ejs files"
+          title: "build: build ejs files for ${{ github.actor }} on ${{ github.ref }}"
+          labels: "build"
           assignees: "${{ github.actor }}"
           reviewers: "${{ github.actor }}"
           branch: "auto-pr/clang-format/${{ github.ref }}"
